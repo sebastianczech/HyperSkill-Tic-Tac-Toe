@@ -23,7 +23,7 @@ def findFinalState(symbols):
     elif "XXX" not in getRows(symbols) and "OOO" not in getRows(symbols):
         result = "Draw"
     elif "XXX" in getRows(symbols):
-
+        result = "X wins"
     elif "OOO" in getRows(symbols):
         result = "O wins"
 
