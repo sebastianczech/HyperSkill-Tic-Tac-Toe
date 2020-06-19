@@ -1,0 +1,8 @@
+input_string = input()
+input_string = input_string.strip()
+input_string = input_string.replace(",", "")
+input_string = input_string.replace("!", "")
+input_string = input_string.replace("?", "")
+input_string = input_string.replace(".", "")
+input_string = input_string.lower()
+print(input_string)
