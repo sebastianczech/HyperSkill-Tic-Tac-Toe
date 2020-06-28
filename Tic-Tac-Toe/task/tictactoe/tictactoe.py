@@ -73,9 +73,9 @@ def matrixToSymblos(matrix):
     return symbols
 
 
-def updateRows(symbols, x, y):
+def updateRows(symbols, x, y, symbol):
     matrix = symbolsToMatrix(symbols)
-    matrix[int(x) - 1][int(y) - 1] = 'X'
+    matrix[int(x) - 1][int(y) - 1] = symbol
     return matrixToSymblos(matrix)
 
 
@@ -87,13 +87,29 @@ def printSymbols(symbols):
     print("---------")
 
 
-symbols = input("Enter cells: > ")
+def getSymbol(lastSymbol):
+    if lastSymbol == "O":
+        return "X"
+    else:
+        return "O"
+
+
+# symbols = input("Enter cells: > ")
+symbols = ['_' for x in range(9)]
 printSymbols(symbols)
-coordinates_str = input("Enter the coordinates: > ")
-coordinates_list = coordinates_str.split()
-while not (analyzeCoordinates(symbols, coordinates_list[0], coordinates_list[1])):
+result = "unkonw"
+lastSymbol = "O"
+
+while result != "X wins" and result != "O wins" and result != "Draw":
     coordinates_str = input("Enter the coordinates: > ")
     coordinates_list = coordinates_str.split()
-symbols = updateRows(symbols, coordinates_list[0], coordinates_list[1])
-printSymbols(symbols)
-# print(findFinalState(symbols))
+    if len(coordinates_list) > 1:
+        while not (analyzeCoordinates(symbols, coordinates_list[0], coordinates_list[1])):
+            coordinates_str = input("Enter the coordinates: > ")
+            coordinates_list = coordinates_str.split()
+        lastSymbol = getSymbol(lastSymbol)
+        print("Last symbol" + lastSymbol)
+        symbols = updateRows(symbols, coordinates_list[0], coordinates_list[1], lastSymbol)
+        printSymbols(symbols)
+        result = findFinalState(symbols)
+        print(result)
